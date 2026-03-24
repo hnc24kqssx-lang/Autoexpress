@@ -1,0 +1,156 @@
+@if (splashVisible()) {
+  <div
+    class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-brand-black"
+    role="status"
+    aria-live="polite"
+    aria-label="Ładowanie strony"
+  >
+    <div class="absolute inset-0 bg-gradient-radial from-brand-red/10 via-transparent to-transparent opacity-60"></div>
+    <div
+      class="relative mb-10 h-28 w-28 overflow-hidden rounded-2xl border border-white/10 bg-brand-charcoal/80 p-3 shadow-[0_0_60px_rgba(220,38,38,0.25)] backdrop-blur-sm animate-logo-pulse"
+    >
+      <img src="/logo.jpg" alt="" class="h-full w-full object-contain" width="112" height="112" />
+    </div>
+    <p class="font-display text-xl tracking-[0.35em] text-white/90 uppercase animate-fade-in">Autoexpress</p>
+    <div class="mt-8 h-px w-48 origin-left bg-gradient-to-r from-transparent via-brand-red to-transparent animate-line-grow"></div>
+    <div class="mt-6 flex gap-1.5">
+      @for (i of [0, 1, 2]; track i) {
+        <span
+          class="h-1.5 w-1.5 rounded-full bg-brand-red animate-pulse"
+          [class.delay-100]="i === 1"
+          [class.delay-200]="i === 2"
+        ></span>
+      }
+    </div>
+  </div>
+}
+
+<div
+  class="min-h-screen flex flex-col bg-brand-black"
+  [class.opacity-0]="splashVisible()"
+  [class.pointer-events-none]="splashVisible()"
+  [class.animate-fade-in-slow]="!splashVisible()"
+>
+  <header
+    class="sticky top-0 z-50 border-b border-white/5 bg-brand-black/75 backdrop-blur-xl transition-all duration-500"
+  >
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <a routerLink="/" class="group flex items-center gap-3 outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-lg">
+        <span
+          class="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-brand-graphite transition-transform duration-300 group-hover:scale-105 group-hover:border-brand-red/40"
+        >
+          <img src="/logo.jpg" alt="Logo Autoexpress" class="h-9 w-9 object-contain" width="36" height="36" />
+        </span>
+        <span class="hidden min-[380px]:flex flex-col leading-tight">
+          <span class="font-display text-lg tracking-wide text-white sm:text-xl">Autoexpress</span>
+          <span class="text-[10px] font-medium uppercase tracking-widest text-brand-red/90 sm:text-xs">Szymon i Piotr Pełka</span>
+        </span>
+      </a>
+
+      <nav class="flex flex-wrap items-center justify-end gap-0.5 sm:gap-1" aria-label="Główna nawigacja">
+        <a
+          routerLink="/"
+          routerLinkActive="text-brand-red"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="rounded-lg px-2.5 py-2 text-sm font-medium text-neutral-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red sm:px-3"
+        >
+          Start
+        </a>
+        <a
+          routerLink="/"
+          fragment="o-nas"
+          class="rounded-lg px-2.5 py-2 text-sm font-medium text-neutral-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red sm:px-3"
+        >
+          O nas
+        </a>
+        <a
+          routerLink="/"
+          fragment="kontakt"
+          class="rounded-lg px-2.5 py-2 text-sm font-medium text-neutral-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red sm:px-3"
+        >
+          Kontakt
+        </a>
+        <a
+          routerLink="/nowosci"
+          routerLinkActive="text-brand-red"
+          class="rounded-lg px-2.5 py-2 text-sm font-medium text-neutral-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red sm:px-3"
+        >
+          Nowości
+        </a>
+        <a
+          href="https://www.facebook.com/profile.php?id=61586096854664"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ml-1 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-neutral-400 transition-all hover:border-brand-red/50 hover:bg-brand-red/10 hover:text-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+          aria-label="Facebook — Autoexpress"
+        >
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+            />
+          </svg>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1">
+    <router-outlet />
+  </main>
+
+  <footer class="border-t border-white/5 bg-brand-charcoal">
+    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+        <div class="flex items-start gap-4">
+          <span class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-brand-graphite">
+            <img src="/logo.jpg" alt="" class="h-10 w-10 object-contain" width="40" height="40" />
+          </span>
+          <div>
+            <p class="font-display text-xl text-white">Autoexpress</p>
+            <p class="text-sm text-neutral-500">Szymon i Piotr Pełka</p>
+            <p class="mt-2 text-sm text-neutral-400">Warsztat samochodowy w Trzeszczynie</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3 text-sm">
+          <a
+            href="tel:+48739051104"
+            class="inline-flex items-center gap-2 font-semibold text-white transition-colors hover:text-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded"
+          >
+            <span class="text-brand-red" aria-hidden="true">●</span>
+            +48 739 051 104
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61586096854664"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-neutral-400 transition-colors hover:text-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded w-fit"
+          >
+            Facebook — obserwuj nas
+          </a>
+        </div>
+      </div>
+      <div class="mt-10 flex flex-col items-center justify-center gap-3 border-t border-white/5 pt-6 sm:flex-row sm:gap-6">
+        <a
+          routerLink="/polityka-prywatnosci"
+          class="text-xs text-neutral-500 transition-colors hover:text-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded"
+        >
+          Polityka prywatności
+        </a>
+        <button
+          type="button"
+          (click)="cookieConsent.openPreferences()"
+          class="text-xs text-neutral-500 transition-colors hover:text-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded"
+        >
+          Ustawienia plików cookies
+        </button>
+      </div>
+      <p class="mt-4 text-center text-xs text-neutral-600">
+        © {{ currentYear }} Autoexpress. Wszelkie prawa zastrzeżone.
+      </p>
+    </div>
+  </footer>
+
+  @if (!splashVisible()) {
+    <app-cookie-banner />
+  }
+</div>
