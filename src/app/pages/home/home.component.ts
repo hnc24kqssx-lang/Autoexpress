@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ContactFormComponent } from '../../components/contact-form/contact-form.component';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink, ContactFormComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

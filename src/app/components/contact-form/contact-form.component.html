@@ -1,0 +1,124 @@
+<form
+  class="contact-form flex flex-col gap-4"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  novalidate
+  aria-labelledby="contact-form-heading"
+>
+  <h3 id="contact-form-heading" class="font-display text-xl text-white sm:text-2xl">Napisz do nas</h3>
+  <p class="text-sm text-neutral-500">
+    Odpowiemy po otrzymaniu wiadomości. Pola oznaczone gwiazdką są wymagane.
+  </p>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div class="flex flex-col gap-1.5">
+      <label for="cf-name" class="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+        Imię i nazwisko <span class="text-brand-red">*</span>
+      </label>
+      <input
+        id="cf-name"
+        type="text"
+        formControlName="name"
+        autocomplete="name"
+        class="min-h-11 w-full rounded-lg border border-white/10 bg-brand-black/60 px-3 py-2.5 text-base text-white placeholder:text-neutral-600 focus:border-brand-red/60 focus:outline-none focus:ring-2 focus:ring-brand-red/40"
+        placeholder="Jan Kowalski"
+        [attr.aria-invalid]="form.controls.name.invalid && form.controls.name.touched"
+        [attr.aria-describedby]="fieldError('name') ? 'cf-name-err' : null"
+      />
+      @if (fieldError('name'); as err) {
+        <span id="cf-name-err" class="text-xs text-red-400" role="alert">{{ err }}</span>
+      }
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label for="cf-email" class="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+        E-mail <span class="text-brand-red">*</span>
+      </label>
+      <input
+        id="cf-email"
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        inputmode="email"
+        class="min-h-11 w-full rounded-lg border border-white/10 bg-brand-black/60 px-3 py-2.5 text-base text-white placeholder:text-neutral-600 focus:border-brand-red/60 focus:outline-none focus:ring-2 focus:ring-brand-red/40"
+        placeholder="jan@example.com"
+        [attr.aria-invalid]="form.controls.email.invalid && form.controls.email.touched"
+        [attr.aria-describedby]="fieldError('email') ? 'cf-email-err' : null"
+      />
+      @if (fieldError('email'); as err) {
+        <span id="cf-email-err" class="text-xs text-red-400" role="alert">{{ err }}</span>
+      }
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-1.5">
+    <label for="cf-phone" class="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+      Telefon <span class="text-neutral-600">(opcjonalnie)</span>
+    </label>
+    <input
+      id="cf-phone"
+      type="tel"
+      formControlName="phone"
+      autocomplete="tel"
+      inputmode="tel"
+      class="min-h-11 w-full rounded-lg border border-white/10 bg-brand-black/60 px-3 py-2.5 text-base text-white placeholder:text-neutral-600 focus:border-brand-red/60 focus:outline-none focus:ring-2 focus:ring-brand-red/40 sm:max-w-md"
+      placeholder="+48 000 000 000"
+      [attr.aria-invalid]="form.controls.phone.invalid && form.controls.phone.touched"
+      [attr.aria-describedby]="fieldError('phone') ? 'cf-phone-err' : null"
+    />
+    @if (fieldError('phone'); as err) {
+      <span id="cf-phone-err" class="text-xs text-red-400" role="alert">{{ err }}</span>
+    }
+  </div>
+
+  <div class="flex flex-col gap-1.5">
+    <label for="cf-msg" class="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+      Wiadomość <span class="text-brand-red">*</span>
+    </label>
+    <textarea
+      id="cf-msg"
+      formControlName="message"
+      rows="5"
+      class="min-h-[140px] w-full resize-y rounded-lg border border-white/10 bg-brand-black/60 px-3 py-2.5 text-base text-white placeholder:text-neutral-600 focus:border-brand-red/60 focus:outline-none focus:ring-2 focus:ring-brand-red/40"
+      placeholder="Opisz problem lub pytanie dotyczące pojazdu…"
+      [attr.aria-invalid]="form.controls.message.invalid && form.controls.message.touched"
+      [attr.aria-describedby]="fieldError('message') ? 'cf-msg-err' : null"
+    ></textarea>
+    @if (fieldError('message'); as err) {
+      <span id="cf-msg-err" class="text-xs text-red-400" role="alert">{{ err }}</span>
+    }
+  </div>
+
+  <div class="flex gap-3 rounded-lg border border-white/10 bg-brand-black/30 p-3 sm:items-start">
+    <input
+      id="cf-accept"
+      type="checkbox"
+      formControlName="accept"
+      class="mt-1 h-5 w-5 shrink-0 rounded border-white/20 bg-brand-black text-brand-red focus:ring-brand-red"
+      [attr.aria-invalid]="form.controls.accept.invalid && form.controls.accept.touched"
+      aria-describedby="cf-accept-hint"
+    />
+    <label for="cf-accept" class="text-sm leading-snug text-neutral-400">
+      Akceptuję przetwarzanie danych w celu odpowiedzi na zapytanie oraz zapoznałem(-am) się z
+      <a routerLink="/polityka-prywatnosci" class="text-brand-red underline-offset-2 hover:underline"
+        >polityką prywatności</a
+      >. <span class="text-brand-red">*</span>
+    </label>
+  </div>
+  <p id="cf-accept-hint" class="sr-only">Wymagana zgoda przed wysłaniem formularza.</p>
+  @if (form.controls.accept.touched && form.controls.accept.hasError('required')) {
+    <span class="text-xs text-red-400" role="alert">Zaznacz zgodę, aby wysłać formularz.</span>
+  }
+
+  <button
+    type="submit"
+    class="min-h-12 w-full touch-manipulation rounded-full bg-brand-red px-6 py-3 text-base font-semibold text-white shadow-[0_0_28px_rgba(220,38,38,0.35)] transition hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-graphite disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:self-start"
+    [disabled]="submitting()"
+  >
+    @if (submitting()) {
+      Wysyłanie…
+    } @else {
+      Wyślij wiadomość
+    }
+  </button>
+</form>

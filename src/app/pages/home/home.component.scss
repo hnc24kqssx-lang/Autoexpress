@@ -1,8 +1,18 @@
 :host {
   display: block;
+  min-width: 0;
 }
 
 #o-nas,
-#kontakt {
+#kontakt,
+#formularz {
   scroll-margin-top: 5.5rem;
+}
+
+@media (min-width: 640px) {
+  #o-nas,
+  #kontakt,
+  #formularz {
+    scroll-margin-top: 6.5rem;
+  }
 }

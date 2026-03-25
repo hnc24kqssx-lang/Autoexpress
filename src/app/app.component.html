@@ -1,6 +1,6 @@
 @if (splashVisible()) {
   <div
-    class="splash-root fixed inset-0 z-[100] flex flex-col items-center justify-center bg-brand-black"
+    class="splash-root fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-x-hidden bg-brand-black"
     role="status"
     aria-live="polite"
     aria-label="Ładowanie strony, animacja warsztatu"
@@ -239,7 +239,7 @@
 }
 
 <div
-  class="min-h-screen flex flex-col bg-brand-black"
+  class="flex min-h-screen w-full flex-col overflow-x-hidden bg-brand-black"
   [class.opacity-0]="splashVisible()"
   [class.pointer-events-none]="splashVisible()"
   [class.animate-fade-in-slow]="!splashVisible()"
@@ -247,7 +247,9 @@
   <header
     class="sticky top-0 z-50 border-b border-white/5 bg-brand-black/75 backdrop-blur-xl transition-all duration-500"
   >
-    <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+    <div
+      class="mx-auto flex min-w-0 max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 sm:flex-nowrap sm:px-6 lg:px-8"
+    >
       <a routerLink="/" class="group flex items-center gap-3 outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded-lg">
         <span
           class="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-brand-graphite transition-transform duration-300 group-hover:scale-105 group-hover:border-brand-red/40"
@@ -260,7 +262,10 @@
         </span>
       </a>
 
-      <nav class="flex flex-wrap items-center justify-end gap-0.5 sm:gap-1" aria-label="Główna nawigacja">
+      <nav
+        class="flex min-w-0 max-w-full flex-1 flex-wrap items-center justify-end gap-0.5 sm:max-w-none sm:flex-none sm:gap-1"
+        aria-label="Główna nawigacja"
+      >
         <a
           routerLink="/"
           routerLinkActive="text-brand-red"
@@ -282,6 +287,13 @@
           class="rounded-lg px-2.5 py-2 text-sm font-medium text-neutral-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red sm:px-3"
         >
           Kontakt
+        </a>
+        <a
+          routerLink="/"
+          fragment="formularz"
+          class="rounded-lg px-2.5 py-2 text-sm font-medium text-neutral-400 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red sm:px-3"
+        >
+          Formularz
         </a>
         <a
           routerLink="/nowosci"
@@ -307,7 +319,7 @@
     </div>
   </header>
 
-  <main class="flex-1">
+  <main class="min-w-0 flex-1 overflow-x-hidden">
     <router-outlet />
   </main>
 
@@ -366,4 +378,7 @@
   @if (!splashVisible()) {
     <app-cookie-banner />
   }
+
+  <app-toast />
+  <app-back-to-top />
 </div>

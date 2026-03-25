@@ -6,10 +6,11 @@ $d: 3.2s;
 
 // ── SVG container ──────────────────────────────────────────────────────────
 .splash-svg {
-  width: min(92vw, 440px);
+  width: min(100%, 440px);
+  max-width: calc(100vw - 2rem);
   height: auto;
   max-height: 45vh;
-  overflow: visible;
+  overflow: hidden;
 }
 
 // ── Car group: horizontal drive ────────────────────────────────────────────
