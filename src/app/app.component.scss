@@ -1,3 +1,132 @@
 :host > div.min-h-screen {
   transition: opacity 0.7s ease-out;
 }
+
+$d: 3.2s;
+
+// ── SVG container ──────────────────────────────────────────────────────────
+.splash-svg {
+  width: min(92vw, 440px);
+  height: auto;
+  max-height: 45vh;
+  overflow: visible;
+}
+
+// ── Car group: horizontal drive ────────────────────────────────────────────
+.splash-car {
+  transform: translate3d(-248px, 0, 0);
+  animation: car-drive $d cubic-bezier(0.25, 0.8, 0.3, 1) forwards;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+// ── Car body: subtle suspension bounce ────────────────────────────────────
+.splash-car-body {
+  animation: car-bounce 0.22s ease-in-out 0.05s 14 alternate;
+}
+
+// ── Wheels: rim spin ───────────────────────────────────────────────────────
+.splash-wheel-rear,
+.splash-wheel-front {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wheel-spin $d ease-out forwards;
+}
+
+// ── Garage door: slides up ─────────────────────────────────────────────────
+.splash-door {
+  animation: door-open $d ease-in-out forwards;
+}
+
+// ── Exhaust smoke puffs ────────────────────────────────────────────────────
+.splash-exhaust-1 { animation: exhaust 1.0s ease-out 0.05s both; }
+.splash-exhaust-2 { animation: exhaust 1.3s ease-out 0.38s both; }
+.splash-exhaust-3 { animation: exhaust 1.7s ease-out 0.70s both; }
+
+// ── Ceiling spotlights pulse ───────────────────────────────────────────────
+.splash-glow {
+  animation: glow-pulse 1.8s ease-in-out infinite;
+}
+
+// ── Headlight beam: fades as car enters dark garage ───────────────────────
+.splash-headlight-beam {
+  opacity: 0.08;
+  animation: hbeam-fade 1.6s ease-out 0.6s forwards;
+}
+
+// ── Brand reveal: logo + text + line ──────────────────────────────────────
+.splash-brand {
+  opacity: 0;
+  animation: brand-in 0.9s ease-out ($d * 0.72) forwards;
+}
+
+.splash-brand-line {
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: line-in 0.7s ease-out ($d * 0.78) forwards;
+}
+
+// ── Keyframes ─────────────────────────────────────────────────────────────
+
+@keyframes car-drive {
+  0%   { transform: translate3d(-248px, 0, 0) scale(0.94); }
+  50%  { transform: translate3d(30px,   0, 0) scale(0.99); }
+  100% { transform: translate3d(96px,   0, 0) scale(1);    }
+}
+
+@keyframes car-bounce {
+  from { transform: translateY(0);    }
+  to   { transform: translateY(-1px); }
+}
+
+@keyframes wheel-spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(720deg); }
+}
+
+@keyframes door-open {
+  0%,  44% { transform: translateY(0);     }
+  60%, 100% { transform: translateY(-82px); }
+}
+
+@keyframes exhaust {
+  0%   { opacity: 0;   transform: translate(0, 0)           scale(0.4); }
+  25%  { opacity: 0.6;                                                  }
+  100% { opacity: 0;   transform: translate(-22px, -14px)   scale(2.8); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.45; }
+  50%      { opacity: 1;    }
+}
+
+@keyframes hbeam-fade {
+  0%   { opacity: 0.08; }
+  100% { opacity: 0;    }
+}
+
+@keyframes brand-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes line-in {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+// ── Reduced motion: skip animations, show end state immediately ───────────
+@media (prefers-reduced-motion: reduce) {
+  .splash-car               { animation: none; transform: translate3d(96px, 0, 0) scale(1); }
+  .splash-car-body          { animation: none; }
+  .splash-wheel-rear,
+  .splash-wheel-front       { animation: none; }
+  .splash-door              { animation: none; transform: translateY(-82px); }
+  .splash-exhaust-1,
+  .splash-exhaust-2,
+  .splash-exhaust-3         { animation: none; opacity: 0; }
+  .splash-glow              { animation: none; opacity: 0.6; }
+  .splash-headlight-beam    { animation: none; opacity: 0; }
+  .splash-brand             { animation: none; opacity: 1; transform: none; }
+  .splash-brand-line        { animation: none; transform: scaleX(1); }
+}
