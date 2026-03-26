@@ -1,23 +1,39 @@
 @if (cookies.showBanner()) {
-  <div
-    class="fixed inset-x-0 bottom-0 z-[95] border-t border-white/10 bg-brand-charcoal/95 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-8px_40px_rgba(0,0,0,0.5)] backdrop-blur-xl sm:p-5 sm:pb-[max(1.25rem,env(safe-area-inset-bottom))]"
-    role="dialog"
-    aria-modal="false"
-    aria-labelledby="cookie-banner-title"
-    aria-describedby="cookie-banner-desc"
-  >
+  <div class="fixed inset-0 z-[95] flex flex-col" role="presentation">
+    <div
+      class="absolute inset-0 bg-brand-black/80 backdrop-blur-sm"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="relative z-10 mt-auto border-t border-white/10 bg-brand-charcoal/98 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[0_-8px_40px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:p-5 sm:pb-[max(1.25rem,env(safe-area-inset-bottom))]"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cookie-banner-title"
+      aria-describedby="cookie-banner-desc"
+    >
     <div class="mx-auto flex max-w-6xl flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-8">
       <div class="min-w-0 flex-1">
         <h2 id="cookie-banner-title" class="font-display text-lg text-white sm:text-xl">
           Pliki cookies
         </h2>
         <p id="cookie-banner-desc" class="mt-2 text-sm leading-relaxed text-neutral-400 sm:text-base">
-          Używamy plików cookies niezbędnych do działania strony oraz — za Twoją zgodą — treści z Facebooka na
+          <span class="font-medium text-neutral-300"
+            >Aby uzyskać pełny dostęp do strony, wybierz jedną z opcji poniżej.</span
+          >
+          Używamy plików cookies niezbędnych do działania strony oraz — jeśli wyrazisz zgodę — treści z Facebooka na
           podstronie Nowości. Szczegóły znajdziesz w
           <a
             routerLink="/polityka-prywatnosci"
             class="font-medium text-brand-red underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded"
             >polityce prywatności</a
+          >.
+          Śledź nas także na
+          <a
+            href="https://www.instagram.com/autoexpress.trzeszczyn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium text-brand-red underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded"
+            >Instagramie</a
           >.
         </p>
       </div>
@@ -37,6 +53,7 @@
           Akceptuję wszystkie
         </button>
       </div>
+    </div>
     </div>
   </div>
 }
