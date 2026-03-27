@@ -4,9 +4,9 @@ import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 
-const DEFAULT_TITLE = 'Autoexpress — warsztat samochodowy w Trzeszczynie';
+const DEFAULT_TITLE = 'AutoExpress — warsztat samochodowy w Trzeszczynie';
 const DEFAULT_DESCRIPTION =
-  'Autoexpress Szymon i Piotr Pełka — profesjonalny warsztat samochodowy w Trzeszczynie. Diagnostyka, naprawy, kontakt: +48 739 051 104.';
+  'AutoExpress Szymon i Piotr Pełka — warsztat w Trzeszczynie, ul. Wspólna 24. Naprawy, klimatyzacja, wulkanizacja. Tel. +48 739 051 104 (Szymon), +48 608 461 421 (Piotr).';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -24,7 +24,7 @@ export class SeoService {
 
     const pageTitle = data['seoTitle'];
     const description = data['seoDescription'] ?? DEFAULT_DESCRIPTION;
-    const fullTitle = pageTitle ? `${pageTitle} | Autoexpress` : DEFAULT_TITLE;
+    const fullTitle = pageTitle ? `${pageTitle} | AutoExpress` : DEFAULT_TITLE;
 
     this.title.setTitle(fullTitle);
     this.meta.updateTag({ name: 'description', content: description });

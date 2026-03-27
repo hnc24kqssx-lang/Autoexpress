@@ -21,15 +21,15 @@
             <img src="/logo.jpg" alt="" class="h-8 w-8 object-contain" width="32" height="32" />
           </span>
           <div>
-            <p class="font-semibold text-white">Autoexpress</p>
+            <p class="font-semibold text-white">AutoExpress</p>
             <p class="text-xs text-neutral-500">Podgląd osi czasu Facebook</p>
           </div>
         </div>
         <a
-          href="https://www.facebook.com/profile.php?id=61586096854664"
+          [href]="pageHref"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-white transition-all hover:border-brand-red/50 hover:bg-brand-red/10 hover:text-brand-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red"
+          class="inline-flex items-center gap-1.5 rounded-xl border border-white/12 px-3 py-1.5 text-xs font-medium text-neutral-200 transition-all hover:border-white/22 hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red sm:gap-2 sm:rounded-full sm:border-white/15 sm:px-4 sm:py-2 sm:text-sm sm:text-white sm:hover:border-brand-red/50 sm:hover:bg-brand-red/10 sm:hover:text-brand-red"
         >
           Otwórz na Facebooku
         </a>
@@ -37,23 +37,32 @@
     </div>
     <div class="relative min-h-[400px] bg-brand-black/40 p-4 sm:min-h-[700px] sm:p-6">
       @if (cookieConsent.allowsThirdPartyEmbeds()) {
-        <iframe
-          title="Podgląd aktualności Autoexpress na Facebooku"
-          [src]="pluginUrl"
-          width="500"
-          height="700"
-          class="mx-auto block w-full max-w-full rounded-xl border border-white/5"
-          style="border: none; overflow: hidden"
-          scrolling="no"
-          frameborder="0"
-          allowfullscreen="true"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          loading="lazy"
-        ></iframe>
+        <!-- SDK + data-show-posts zamiast iframe page.php?tabs=timeline (unika błędu FB 1357032 / wiszącego spinnera). -->
+        <div
+          #fbWrap
+          class="fb-widget-host mx-auto w-full max-w-[500px] overflow-hidden rounded-xl border border-white/5 bg-white"
+        >
+          <div
+            class="fb-page"
+            [attr.data-href]="pageHref"
+            data-show-posts="true"
+            data-width="500"
+            data-height="700"
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="false"
+            data-lazy="false"
+          >
+            <blockquote [attr.cite]="pageHref" class="fb-xfbml-parse-ignore">
+              <a [href]="pageHref" target="_blank" rel="noopener noreferrer">AutoExpress — Facebook</a>
+            </blockquote>
+          </div>
+        </div>
         <p class="mt-6 text-center text-sm text-neutral-500">
-          Jeśli podgląd się nie wczytuje (np. blokada ciasteczek), otwórz
+          Jeśli podgląd się nie wczytuje (ograniczenia Facebooka lub przeglądarki), otwórz
           <a
-            href="https://www.facebook.com/profile.php?id=61586096854664"
+            [href]="pageHref"
             target="_blank"
             rel="noopener noreferrer"
             class="text-brand-red underline-offset-2 hover:underline"
@@ -71,12 +80,12 @@
           <button
             type="button"
             (click)="cookieConsent.openPreferences()"
-            class="rounded-full bg-brand-red px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            class="rounded-xl border border-brand-red/45 bg-brand-red/15 px-5 py-2.5 text-sm font-semibold text-brand-red transition-colors hover:border-brand-red/60 hover:bg-brand-red/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:rounded-full sm:border-0 sm:bg-brand-red sm:px-6 sm:py-3 sm:text-white sm:hover:bg-red-600"
           >
             Zmień ustawienia cookies
           </button>
           <a
-            href="https://www.facebook.com/profile.php?id=61586096854664"
+            [href]="pageHref"
             target="_blank"
             rel="noopener noreferrer"
             class="text-sm font-medium text-brand-red underline-offset-2 hover:underline"

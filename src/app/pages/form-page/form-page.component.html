@@ -1,0 +1,32 @@
+<section class="border-b border-white/5 bg-brand-black py-12 sm:py-16 lg:py-20" aria-labelledby="form-page-heading">
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+    <a
+      routerLink="/"
+      fragment="kontakt"
+      class="inline-flex text-sm font-medium text-brand-red transition-colors hover:text-red-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red rounded"
+    >
+      ← Wróć do strony głównej
+    </a>
+    <h1 id="form-page-heading" class="mt-6 font-display text-2xl font-semibold uppercase tracking-wide text-white sm:text-3xl">
+      Napisz do nas
+    </h1>
+    <p class="mt-3 text-sm leading-relaxed text-neutral-400 sm:text-base">
+      Opisz problem lub zapytaj o termin — odpowiemy tak szybko, jak to możliwe. Możesz też zadzwonić:
+      @for (p of phones; track p.telHref) {
+        <a
+          [href]="p.telHref"
+          class="font-medium text-white underline-offset-2 hover:text-brand-red hover:underline"
+        >
+          {{ p.display }}
+        </a>
+        @if (!$last) {
+          <span aria-hidden="true"> lub </span>
+        }
+      }.
+    </p>
+
+    <div class="mt-10 rounded-2xl border border-white/10 bg-gradient-to-br from-brand-graphite/90 to-brand-charcoal p-6 sm:p-8">
+      <app-contact-form />
+    </div>
+  </div>
+</section>

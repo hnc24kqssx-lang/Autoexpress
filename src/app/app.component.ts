@@ -6,6 +6,7 @@ import { BackToTopComponent } from './components/back-to-top/back-to-top.compone
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { CookieConsentService } from './core/cookie-consent.service';
+import { WORKSHOP_ADDRESS_SINGLE_LINE, WORKSHOP_PHONES } from './core/contact.constants';
 import { SeoService } from './core/seo.service';
 
 @Component({
@@ -30,6 +31,8 @@ export class AppComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly cookieConsent = inject(CookieConsentService);
+  readonly workshopPhones = WORKSHOP_PHONES;
+  readonly workshopAddressSingle = WORKSHOP_ADDRESS_SINGLE_LINE;
   readonly currentYear = new Date().getFullYear();
   readonly splashVisible = signal(true);
   readonly menuOpen = signal(false);
