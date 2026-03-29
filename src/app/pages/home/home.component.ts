@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { RevealOnScrollDirective } from '../../directives/reveal-on-scroll.directive';
 import {
   WORKSHOP_ADDRESS_LINES,
   WORKSHOP_PHONES,
@@ -12,7 +13,7 @@ export interface PriceRow {
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, RevealOnScrollDirective],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+:host article a[href] {
+  @apply tap-feedback-inline rounded-sm;
+}

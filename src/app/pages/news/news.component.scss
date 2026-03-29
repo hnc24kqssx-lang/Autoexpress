@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+:host a[href]:not([class*='tap-feedback']) {
+  @apply tap-feedback-inline rounded-sm;
+}

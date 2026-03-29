@@ -10,6 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { CookieConsentService } from '../../core/cookie-consent.service';
+import { RevealOnScrollDirective } from '../../directives/reveal-on-scroll.directive';
 
 declare global {
   interface Window {
@@ -24,7 +25,7 @@ export const FACEBOOK_PAGE_HREF = 'https://www.facebook.com/profile.php?id=61586
 
 @Component({
   selector: 'app-news',
-  imports: [],
+  imports: [RevealOnScrollDirective],
   templateUrl: './news.component.html',
   styleUrl: './news.component.scss',
 })

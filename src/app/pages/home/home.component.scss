@@ -3,6 +3,11 @@
   min-width: 0;
 }
 
+:host a[href],
+:host button {
+  @apply tap-feedback;
+}
+
 .hero-rotator {
   .hero-bg {
     position: absolute;

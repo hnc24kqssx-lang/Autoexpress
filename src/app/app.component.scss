@@ -2,6 +2,15 @@
   transition: opacity 0.7s ease-out;
 }
 
+header a,
+header button,
+aside a,
+aside button,
+footer a,
+footer button {
+  @apply tap-feedback;
+}
+
 $dur: 2.5s;
 $ease: cubic-bezier(0.16, 1, 0.3, 1);
 

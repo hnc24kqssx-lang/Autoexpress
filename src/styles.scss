@@ -58,4 +58,81 @@
   .opacity-0-animate {
     opacity: 0;
   }
+
+  /** Odzew na tap / klik (skala + lekki flash obramowania) */
+  .tap-feedback {
+    @apply transition-[transform,box-shadow,background-color] duration-150 ease-out;
+  }
+  .tap-feedback:active {
+    @apply scale-[0.98] motion-reduce:scale-100;
+    box-shadow: inset 0 0 0 1px rgba(220, 38, 38, 0.35);
+  }
+  .tap-feedback-inline {
+    @apply transition-[filter,opacity] duration-100;
+  }
+  .tap-feedback-inline:active {
+    @apply brightness-110 motion-reduce:brightness-100;
+  }
+}
+
+/* Sekcje: on-show (dyrektywa appReveal) */
+.reveal-wait[data-reveal='up'] {
+  opacity: 0;
+  transform: translate3d(0, 1.5rem, 0);
+}
+.reveal-wait[data-reveal='fade'] {
+  opacity: 0;
+}
+.reveal-wait[data-reveal='scale'] {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+[data-reveal='up'].reveal-visible {
+  animation: reveal-in-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+[data-reveal='fade'].reveal-visible {
+  animation: reveal-in-fade 0.7s ease-out forwards;
+}
+[data-reveal='scale'].reveal-visible {
+  animation: reveal-in-scale 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes reveal-in-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.5rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes reveal-in-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes reveal-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-wait {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  [data-reveal].reveal-visible {
+    animation: none !important;
+  }
 }
